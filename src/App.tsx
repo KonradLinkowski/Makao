@@ -22,5 +22,17 @@ export const App = () => {
       },
     ].map((item, index) => ({ ...item, index }))
   );
-  return <Hand cards={cards} />;
+
+  const [played, setPlayed] = useState<CardData[]>([]);
+
+  const handleCardPlay = (index: number) => {
+    setPlayed([cards[index], ...played]);
+    setCards(cards.filter((_, i) => i !== index));
+  };
+
+  return (
+    <div>
+      <Hand cards={cards} onPlay={handleCardPlay} />
+    </div>
+  );
 };
